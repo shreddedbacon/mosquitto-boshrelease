@@ -1,0 +1,7 @@
+---
+name: mosquitto
+
+dependencies: []
+
+files:
+  - mosquitto/mosquitto-*.tar.gz

@@ -1,0 +1,13 @@
+# user
+user vcap
+# standard port
+port <%= p('port') %>
+<%- if_p('ssl.enabled') do |confssl| -%>
+# ssl port
+listener <%= p('ssl.port') %>
+# ssl certs
+cafile /var/vcap/jobs/mosquitto/ssl/ca.crt
+keyfile /var/vcap/jobs/mosquitto/ssl/server.key
+certfile /var/vcap/jobs/mosquitto/ssl/server.crt
+<%- end -%>
+

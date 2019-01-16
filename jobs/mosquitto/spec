@@ -1,0 +1,30 @@
+---
+name: mosquitto
+
+templates:
+  bin/mosquitto_ctl.sh.erb: bin/mosquitto_ctl
+  config/mosquitto.conf.erb: config/mosquitto.conf
+  ssl/ca.crt.erb: ssl/ca.crt
+  ssl/server.key.erb: ssl/server.key
+  ssl/server.crt.erb: ssl/server.crt
+
+packages:
+  - mosquitto
+
+properties:
+  port:
+    default: 1883
+    description: "port for mosquitto to listen on"
+  ssl:
+    enable:
+      optional: true
+      description: "enable or disable ssl listener"
+    port:
+      default: 8883
+      description: "ssl port to listen on"
+    ca_certificate:
+      description: "ca certificate"
+    certificate:
+      description: "ssl certificate"
+    private_key:
+      description: "private key for ssl certificate"

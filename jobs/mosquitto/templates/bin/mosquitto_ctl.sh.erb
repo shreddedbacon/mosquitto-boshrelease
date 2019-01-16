@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Setup env vars and folders for the gogs_ctl script
+
+PACKAGE_DIR=/var/vcap/packages/mosquitto
+JOB_DIR=/var/vcap/jobs/mosquitto
+LOG_DIR=/var/vcap/sys/log/mosquitto
+JOB_NAME=mosquitto
+RUN_DIR=/var/vcap/sys/run/$JOB_NAME
+PID_FILE=$RUN_DIR/$JOB_NAME.pid
+
+case $1 in
+
+  start)
+    # store pid in $PIDFILE
+    echo $$ > $PID_FILE
+
+    cd ${PACKAGE_DIR}
+    exec chpst -u vcap:vcap \
+         ${PACKAGE_DIR}/bin/mosquitto -c ${JOB_DIR}/config/mosquitto.conf \
+         >>$LOG_DIR/$JOB_NAME.stdout.log \
+         2>>$LOG_DIR/$JOB_NAME.stderr.log
+
+    ;;
+
+  stop)
+    kill -9 $(cat $PID_FILE)
+
+    ;;
+  *)
+    echo "Usage: mosquitto_ctl {start|stop}"
+
+    ;;
+
+esac
+exit 0

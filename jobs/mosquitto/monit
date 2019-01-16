@@ -1,0 +1,5 @@
+check process mosquitto
+  with pidfile /var/vcap/sys/run/mosquitto/mosquitto.pid
+  start program "/var/vcap/jobs/mosquitto/bin/mosquitto_ctl start"
+  stop program "/var/vcap/jobs/mosquitto/bin/mosquitto_ctl stop"
+  group vcap

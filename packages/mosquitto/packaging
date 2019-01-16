@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+echo "Extracting mosquitto..."
+mosquitto_dir=$(tar tf mosquitto/mosquitto-*.tar.gz --exclude="*/*")
+tar xzvf mosquitto/mosquitto-*.tar.gz
+
+
+pushd ${mosquitto_dir}
+  make WITH_DOCS=no
+  mkdir ${BOSH_INSTALL_TARGET}/bin
+  cp src/mosquitto ${BOSH_INSTALL_TARGET}/bin/mosquitto
+  cp client/mosquitto_sub ${BOSH_INSTALL_TARGET}/bin/mosquitto_sub
+  cp client/mosquitto_pub ${BOSH_INSTALL_TARGET}/bin/mosquitto_pub
+popd
