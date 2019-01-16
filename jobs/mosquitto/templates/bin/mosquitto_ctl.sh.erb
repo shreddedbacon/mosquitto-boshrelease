@@ -3,12 +3,10 @@
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
-# Setup env vars and folders for the gogs_ctl script
-
-PACKAGE_DIR=/var/vcap/packages/mosquitto
-JOB_DIR=/var/vcap/jobs/mosquitto
-LOG_DIR=/var/vcap/sys/log/mosquitto
 JOB_NAME=mosquitto
+PACKAGE_DIR=/var/vcap/packages/mosquitto
+JOB_DIR=/var/vcap/jobs/$JOB_NAME
+LOG_DIR=/var/vcap/sys/log/$JOB_NAME
 RUN_DIR=/var/vcap/sys/run/$JOB_NAME
 PID_FILE=$RUN_DIR/$JOB_NAME.pid
 
