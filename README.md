@@ -5,6 +5,16 @@ This is a BOSH release for Mosquitto MQTT server.
 The package also contains the pub and sub clients which could be used for other jobs or errands
 
 # Usage
+## Without SSL
+```
+bosh -d mosquitto deploy manifests/mosquitto.yml
+```
+## With SSL
+```
+bosh -d mosquitto deploy manifests/mosquitto.yml -o manifests/ops/ssl.yml
+```
+
+# Development
 ## Get Blobs
 Download the blob from github
 ```
